@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fluoroquinolones Interactive Project</title>
+<title>Fluoroquinolones Clinical Project</title>
 
 <style>
 :root{
@@ -25,9 +25,17 @@ body{
 section{padding:60px 20px}
 h1,h2{text-align:center}
 
-/* BUTTON */
+.nav{
+  display:flex;
+  justify-content:space-between;
+  padding:15px;
+  position:fixed;
+  width:100%;
+  background:var(--bg);
+}
+
 .btn{
-  padding:10px 18px;
+  padding:10px 15px;
   border:none;
   background:var(--primary);
   color:#fff;
@@ -35,48 +43,22 @@ h1,h2{text-align:center}
   cursor:pointer;
 }
 
-/* NAV */
-.nav{
-  display:flex;
-  justify-content:space-between;
-  padding:15px 20px;
-  position:fixed;
-  width:100%;
-  background:var(--bg);
-}
-
-/* COUNTERS */
-.counter{
-  font-size:30px;
-  font-weight:bold;
-}
-
-/* QUIZ */
-.quiz{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-}
-.quiz-box{
-  display:none;
-  background:#fff;
+.card{
+  background:#f5f8ff;
   padding:20px;
   border-radius:10px;
+  margin:10px auto;
+  max-width:800px;
 }
+
+.counter{font-size:30px;font-weight:bold}
+
+.quiz{position:fixed;bottom:20px;right:20px}
+.quiz-box{display:none;background:#fff;padding:20px;border-radius:10px}
 .quiz-box.active{display:block}
 
-/* SWITCH */
-.switch{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-}
-.switch button{
-  padding:10px;
-  border:none;
-  cursor:pointer;
-}
-.active-btn{background:#2f74d0;color:#fff}
+.team{max-width:800px;margin:auto;text-align:center}
+
 </style>
 </head>
 
@@ -89,13 +71,13 @@ h1,h2{text-align:center}
 </div>
 
 <section>
-<h1>Fluoroquinolones Project</h1>
-<p style="text-align:center">Interactive Clinical Pharmacology Website</p>
+<h1>Fluoroquinolones Safety & Clinical Use</h1>
+<p style="text-align:center">Interactive Pharmacology Project</p>
 </section>
 
 <!-- COUNTERS -->
 <section>
-<h2>Key Facts</h2>
+<h2>Key Highlights</h2>
 <div style="display:flex;justify-content:center;gap:40px">
 <div><div class="counter" data-target="100">0</div><p>Bioavailability</p></div>
 <div><div class="counter" data-target="4">0</div><p>Major Risks</p></div>
@@ -103,22 +85,64 @@ h1,h2{text-align:center}
 </div>
 </section>
 
-<!-- SWITCH -->
+<!-- INTRO -->
 <section>
-<h2>Past vs Current</h2>
-<div class="switch">
-<button class="active-btn" onclick="showPast()">Past</button>
-<button onclick="showCurrent()">Current</button>
+<h2>Introduction</h2>
+<div class="card">
+Fluoroquinolones are broad-spectrum bactericidal antibiotics that inhibit DNA gyrase and topoisomerase IV.  
+They have excellent bioavailability and tissue penetration but their use is now restricted due to serious adverse effects.
+</div>
+</section>
+
+<!-- COMPARISON -->
+<section>
+<h2>Past vs Current Use</h2>
+
+<button class="btn" onclick="showPast()">Past</button>
+<button class="btn" onclick="showCurrent()">Current</button>
+
+<div id="content" class="card">
+Used widely as first-line therapy for mild infections
+</div>
+</section>
+
+<!-- WARNINGS -->
+<section>
+<h2>FDA Safety Warnings</h2>
+<div class="card">
+Tendon rupture, neuropathy, CNS effects, dysglycemia, and aortic aneurysm/dissection.  
+Use should be restricted and based on risk–benefit assessment.
+</div>
+</section>
+
+<!-- DECISION TOOL -->
+<section>
+<h2>Clinical Decision Tool</h2>
+
+<div class="card">
+<p>Is infection mild?</p>
+<button onclick="decision('avoid')">Yes</button>
+<button onclick="decision('consider')">No</button>
+
+<p id="decisionResult"></p>
 </div>
 
-<div id="content" style="text-align:center;margin-top:20px">
-Used widely as first-line therapy
+</section>
+
+<!-- TEAM -->
+<section>
+<h2>Team</h2>
+<div class="team">
+Osama Tharwat - Razan Hisham - Tasneem Khaled - Nour Hany - Rawan Attef - 
+Alaa Abd El Mageed - Rawan Hassan - Yasmeen Wahdan - Saif Ahmed - 
+Yousef Osama - Aya Abdelnaser - Shimaa Esam - Menna Sabry - 
+Fatma Emad - Sarah Omar
 </div>
 </section>
 
 <!-- QUIZ -->
 <div class="quiz">
-<button class="btn" onclick="openQuiz()">Quick Quiz</button>
+<button class="btn" onclick="openQuiz()">Quiz</button>
 
 <div class="quiz-box" id="quizBox">
 <p>Use fluoroquinolones in mild infections?</p>
@@ -126,17 +150,6 @@ Used widely as first-line therapy
 <button onclick="answer(true)">No</button>
 </div>
 </div>
-
-<!-- TEAM -->
-<section>
-<h2>Team</h2>
-<p style="text-align:center">
-Osama Tharwat - Razan Hisham - Tasneem Khaled - Nour Hany - Rawan Attef - 
-Alaa Abd El Mageed - Rawan Hassan - Yasmeen Wahdan - Saif Ahmed - 
-Yousef Osama - Aya Abdelnaser - Shimaa Esam - Menna Sabry - 
-Fatma Emad - Sarah Omar
-</p>
-</section>
 
 <script>
 // DARK MODE
@@ -165,7 +178,16 @@ function showPast(){
   document.getElementById("content").innerText="Used widely as first-line therapy";
 }
 function showCurrent(){
-  document.getElementById("content").innerText="Restricted to serious infections only";
+  document.getElementById("content").innerText="Restricted to serious infections";
+}
+
+// DECISION
+function decision(type){
+  if(type=="avoid"){
+    document.getElementById("decisionResult").innerText="Avoid use ❌";
+  }else{
+    document.getElementById("decisionResult").innerText="Consider use ⚠️";
+  }
 }
 
 // QUIZ
@@ -173,11 +195,7 @@ function openQuiz(){
   document.getElementById("quizBox").classList.toggle("active");
 }
 function answer(correct){
-  if(correct){
-    alert("Correct ✅");
-  }else{
-    alert("Wrong ❌");
-  }
+  alert(correct ? "Correct ✅" : "Wrong ❌");
 }
 </script>
 
