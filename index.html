@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fluoroquinolones – NextGen Clinical Profile</title>
-  <meta name="description" content="Interactive academic platform about fluoroquinolone clinical use and safety." />
+  <meta name="description" content="Interactive academic platform about fluoroquinolone clinical use, safety warnings, risk-benefit balance, and clinical recommendations." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -20,11 +20,12 @@
       --rose: #ff2a5f;
       --rose-glow: rgba(255, 42, 95, 0.4);
       --purple: #b537f2;
+      --amber: #f0a500;
       
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       
-      --glass-bg: rgba(13, 25, 48, 0.4);
+      --glass-bg: rgba(13, 25, 48, 0.5);
       --glass-border: rgba(0, 240, 255, 0.15);
       --glass-highlight: rgba(255, 255, 255, 0.05);
       
@@ -41,12 +42,12 @@
         radial-gradient(circle at 15% 50%, rgba(0, 240, 255, 0.08), transparent 25%),
         radial-gradient(circle at 85% 30%, rgba(181, 55, 242, 0.08), transparent 25%);
       color: var(--text-main);
-      line-height: 1.6;
+      line-height: 1.7;
       overflow-x: hidden;
     }
 
     a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
+    img { max-width: 100%; display: block; border-radius: 16px; }
     button, input { font-family: inherit; }
 
     /* Glassmorphism Utilities */
@@ -68,7 +69,7 @@
     /* NAV */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: rgba(5, 11, 20, 0.8);
+      background: rgba(5, 11, 20, 0.85);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--glass-border);
     }
@@ -85,10 +86,11 @@
       box-shadow: 0 0 15px var(--cyan-glow);
     }
     .brand-title { font-weight: 800; font-size: 1.1rem; letter-spacing: 1px; }
-    .nav-links { display: flex; gap: 8px; }
+    
+    .nav-links { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
     .nav-links a {
-      font-size: 0.9rem; font-weight: 600; color: var(--text-muted);
-      padding: 8px 16px; border-radius: 99px; transition: var(--transition);
+      font-size: 0.85rem; font-weight: 600; color: var(--text-muted);
+      padding: 8px 14px; border-radius: 99px; transition: var(--transition);
     }
     .nav-links a:hover { color: var(--cyan); background: rgba(0, 240, 255, 0.1); }
     .nav-cta {
@@ -117,8 +119,8 @@
 
     /* Layout & Sections */
     .container { max-width: 1300px; margin: 0 auto; padding: 0 24px; position: relative; }
-    section { padding: 120px 0; }
-    .section-header { text-align: center; margin-bottom: 60px; }
+    section { padding: 90px 0; }
+    .section-header { text-align: center; margin-bottom: 50px; }
     .kicker {
       display: inline-block; color: var(--cyan); font-family: 'Space Grotesk', sans-serif;
       font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
@@ -126,28 +128,32 @@
       background: rgba(0, 240, 255, 0.05);
     }
     .title {
-      font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; line-height: 1.1;
+      font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900; line-height: 1.1;
       background: linear-gradient(to right, #fff, var(--text-muted));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       margin-bottom: 20px;
     }
-    .desc { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+    .desc { color: var(--text-muted); font-size: 1.05rem; max-width: 800px; margin: 0 auto; }
 
     /* HERO */
-    .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 70px; }
-    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 90px; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center; }
     .hero-content h1 {
-      font-size: clamp(3rem, 6vw, 5rem); font-weight: 900; line-height: 1; margin-bottom: 24px;
+      font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 24px;
     }
     .hero-content h1 span { color: var(--cyan); text-shadow: 0 0 20px var(--cyan-glow); }
-    .hero-actions { display: flex; gap: 16px; margin-top: 40px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 30px; margin-bottom: 30px; }
     
+    .hero-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .metric { padding: 16px; text-align: center; border: 1px solid var(--glass-border); border-radius: 16px; background: rgba(13,25,48,0.3); }
+    .metric .value { font-family: 'Space Grotesk'; font-size: 1.8rem; font-weight: 700; color: var(--cyan); }
+    .metric .label { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+
     /* Hero 3D Element */
     .hero-visual { position: relative; perspective: 1000px; }
     .molecule-card {
       width: 100%; aspect-ratio: 1; transform-style: preserve-3d;
-      animation: float 6s ease-in-out infinite;
-      display: flex; justify-content: center; align-items: center;
+      animation: float 6s ease-in-out infinite; display: flex; justify-content: center; align-items: center;
     }
     .core-orb {
       width: 150px; height: 150px; border-radius: 50%;
@@ -157,8 +163,7 @@
     }
     .orbit {
       position: absolute; width: 300px; height: 300px; border-radius: 50%;
-      border: 1px dashed var(--glass-border);
-      animation: spin 10s linear infinite;
+      border: 1px dashed var(--glass-border); animation: spin 10s linear infinite;
     }
     .orbit::after {
       content: ''; position: absolute; top: -10px; left: 50%; width: 20px; height: 20px;
@@ -167,132 +172,198 @@
     .orbit-2 { width: 450px; height: 450px; animation: spin 15s linear infinite reverse; border-style: solid; border-color: rgba(181, 55, 242, 0.2); }
     .orbit-2::after { background: var(--purple); box-shadow: 0 0 20px var(--purple); }
 
-    /* METRICS */
-    .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
-    .metric-box { padding: 30px; text-align: center; transition: var(--transition); }
-    .metric-box:hover { border-color: var(--cyan); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1); }
-    .metric-num { font-family: 'Space Grotesk'; font-size: 3rem; font-weight: 700; color: var(--cyan); margin-bottom: 10px; }
-    .metric-label { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-
-    /* MECHANISM TIMELINE */
-    .mech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-    .mech-step { padding: 30px 20px; text-align: center; }
-    .mech-icon {
-      width: 60px; height: 60px; margin: 0 auto 20px; display: grid; place-items: center;
-      font-size: 1.8rem; background: rgba(0, 240, 255, 0.1); border-radius: 16px;
-      border: 1px solid var(--cyan); color: var(--cyan); box-shadow: 0 0 15px var(--cyan-glow);
-    }
-    .mech-step h4 { font-size: 1.2rem; margin-bottom: 10px; color: #fff; }
-    .mech-step p { font-size: 0.9rem; color: var(--text-muted); }
-
-    /* SAFETY CARDS (Hover 3D) */
-    .safety-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
-    .safety-card {
-      padding: 40px 24px; text-align: center; cursor: pointer;
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .safety-card:hover { transform: translateY(-10px) scale(1.02); border-color: var(--rose); box-shadow: 0 15px 40px var(--rose-glow); }
-    .safety-card .icon { font-size: 2.5rem; margin-bottom: 20px; filter: drop-shadow(0 0 10px var(--rose)); }
-    .safety-card h4 { color: #fff; font-size: 1.3rem; margin-bottom: 12px; }
-    .safety-card p { color: var(--text-muted); font-size: 0.9rem; }
-
-    /* THE GAME: BACTERIA BUSTER */
-    #game { background: linear-gradient(180deg, var(--bg-deep), #091324); }
-    .game-wrapper { max-width: 800px; margin: 0 auto; text-align: center; }
-    .game-board {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;
-      margin: 40px auto; max-width: 500px; perspective: 800px;
-    }
-    .cell {
-      aspect-ratio: 1; background: rgba(0,0,0,0.5); border: 2px solid var(--glass-border);
-      border-radius: 20px; position: relative; overflow: hidden; cursor: crosshair;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
-    }
-    .bacteria {
-      width: 80%; height: 80%; position: absolute; bottom: -100%; left: 10%;
-      background-size: contain; background-repeat: no-repeat; background-position: center;
-      transition: bottom 0.2s; pointer-events: auto;
-    }
-    .bacteria.up { bottom: 10%; }
-    /* Emoji as background for simplicity in single file */
-    .bac-gram-neg::before { content: '🦠'; font-size: 4rem; position: absolute; inset:0; display:grid; place-items:center; filter: hue-rotate(90deg) drop-shadow(0 0 10px var(--emerald)); }
-    .bac-gram-pos::before { content: '🧫'; font-size: 4rem; position: absolute; inset:0; display:grid; place-items:center; filter: drop-shadow(0 0 10px var(--purple)); }
+    /* INTRO */
+    .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .intro-card { padding: 30px; }
+    .intro-card h3 { font-size: 1.3rem; color: var(--cyan); margin-bottom: 12px; }
+    .intro-card p { color: var(--text-muted); font-size: 1rem; }
     
-    .game-stats {
-      display: flex; justify-content: space-between; font-family: 'Space Grotesk';
-      font-size: 1.5rem; color: var(--cyan); margin-bottom: 20px;
-      padding: 15px 30px; background: rgba(0, 240, 255, 0.05); border-radius: 15px; border: 1px solid var(--cyan);
+    .intro-slab { padding: 30px; display: flex; flex-direction: column; justify-content: center; }
+    .intro-slab .stat { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--glass-border); }
+    .intro-slab .stat:last-child { border-bottom: none; }
+    .intro-slab .stat .num { font-size: 1.6rem; font-weight: 900; color: var(--emerald); }
+    .intro-slab .stat .txt { color: var(--text-muted); font-size: 0.95rem; text-align: right; }
+
+    /* MECHANISM */
+    .timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 24px; }
+    .step { padding: 24px 18px; text-align: center; transition: var(--transition); }
+    .step:hover { transform: translateY(-5px); border-color: var(--cyan); box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1); }
+    .step .icon {
+      width: 55px; height: 55px; margin: 0 auto 16px; display: grid; place-items: center;
+      font-size: 1.5rem; background: rgba(0, 240, 255, 0.1); border-radius: 16px;
+      border: 1px solid var(--cyan); color: var(--cyan);
     }
+    .step h4 { font-size: 1.1rem; margin-bottom: 8px; color: #fff; }
+    .step p { font-size: 0.9rem; color: var(--text-muted); }
+
+    /* COMPARISON */
+    .compare-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .compare-card { padding: 30px; }
+    .compare-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .compare-head h3 { font-size: 1.5rem; color: #fff; }
+    .compare-pill { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; padding: 8px 12px; border-radius: 99px; }
+    .past .compare-pill { background: rgba(0,255,136,0.1); color: var(--emerald); border: 1px solid var(--emerald); }
+    .current .compare-pill { background: rgba(255,42,95,0.1); color: var(--rose); border: 1px solid var(--rose); }
+    
+    .compare-list { list-style: none; display: grid; gap: 12px; margin-bottom: 20px; }
+    .compare-list li { display: flex; gap: 12px; align-items: flex-start; color: var(--text-muted); font-size: 1rem; }
+    .compare-list li span {
+      flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 0.8rem; margin-top: 2px;
+    }
+    .past .compare-list li span { background: rgba(0,255,136,0.1); color: var(--emerald); }
+    .current .compare-list li span { background: rgba(255,42,95,0.1); color: var(--rose); }
+    .figure-caption { margin-top: 12px; font-size: 0.85rem; color: var(--text-muted); text-align: center; }
+
+    /* WARNINGS (FLIP CARDS) */
+    .warning-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+    .flip-card { perspective: 1000px; min-height: 240px; cursor: pointer; }
+    .flip-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; }
+    .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+    .flip-front, .flip-back { 
+      position: absolute; width: 100%; height: 100%; backface-visibility: hidden; 
+      border-radius: var(--radius); padding: 20px; display: flex; flex-direction: column; 
+      justify-content: center; align-items: center; 
+    }
+    .flip-front { background: var(--glass-bg); border: 1px solid var(--glass-border); }
+    .flip-back { 
+      background: rgba(255, 42, 95, 0.05); border: 1px solid var(--rose); 
+      transform: rotateY(180deg); box-shadow: 0 0 20px rgba(255,42,95,0.1);
+    }
+    .warn-icon { font-size: 2rem; margin-bottom: 12px; filter: drop-shadow(0 0 8px var(--rose)); }
+    .flip-front h4 { color: #fff; font-size: 1.1rem; margin-bottom: 6px; }
+    .flip-front p { color: var(--rose); font-size: 0.85rem; font-weight: 600; }
+    .flip-back p { color: var(--text-main); font-size: 0.9rem; line-height: 1.6; }
+
+    /* RISK FACTORS */
+    .risk-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+    .risk-item { padding: 24px 16px; text-align: center; transition: var(--transition); }
+    .risk-item:hover { transform: translateY(-5px); border-color: var(--amber); box-shadow: 0 10px 20px rgba(240, 165, 0, 0.1); }
+    .risk-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .risk-item h4 { color: #fff; font-size: 1rem; margin-bottom: 8px; }
+    .risk-item p { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* BALANCE */
+    .balance-wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 30px; align-items: center; }
+    .balance-chart { padding: 40px; display: flex; align-items: center; justify-content: center; min-height: 380px; }
+    .balance-chart svg { width: 100%; max-width: 600px; }
+    .benefit-risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+    .br-card { padding: 24px; }
+    .br-card h4 { font-size: 1.1rem; margin-bottom: 16px; color: #fff; }
+    .br-card ul { list-style: none; display: grid; gap: 10px; color: var(--text-muted); font-size: 0.95rem; }
+    .br-card li { display: flex; gap: 10px; align-items: flex-start; }
+    .br-card li span { flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 0.8rem; font-weight: 900; }
+    .br-card.green li span { background: rgba(0,255,136,0.1); color: var(--emerald); }
+    .br-card.red li span { background: rgba(255,42,95,0.1); color: var(--rose); }
+    .principle { padding: 20px; text-align: center; background: rgba(0,240,255,0.1); border: 1px solid var(--cyan); color: #fff; font-weight: 600; border-radius: 16px; }
 
     /* DECISION TOOL */
-    .decision-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-    .question-box { margin-bottom: 24px; }
-    .question-box label { display: block; font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; color: #fff; }
-    .radio-group { display: flex; gap: 12px; }
+    .decision-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+    .decision-card { padding: 30px; }
+    .decision-card h3 { font-size: 1.5rem; color: #fff; margin-bottom: 10px; }
+    .decision-card p { color: var(--text-muted); margin-bottom: 24px; }
+    .q-row { margin-bottom: 20px; padding: 20px; border: 1px solid var(--glass-border); border-radius: 16px; background: rgba(0,0,0,0.2); }
+    .q-row label { display: block; font-weight: 600; color: #fff; margin-bottom: 12px; }
+    .radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
     .radio-group input { display: none; }
-    .radio-group label {
-      flex: 1; text-align: center; padding: 12px; border: 1px solid var(--glass-border);
-      border-radius: 12px; cursor: pointer; transition: var(--transition); color: var(--text-muted);
-    }
-    .radio-group input:checked + label {
-      background: rgba(0, 240, 255, 0.15); border-color: var(--cyan); color: var(--cyan);
-      box-shadow: 0 0 15px var(--cyan-glow);
-    }
-    .result-panel {
-      padding: 40px; display: flex; flex-direction: column; justify-content: center;
-      text-align: center; background: linear-gradient(135deg, rgba(0,240,255,0.1), rgba(181,55,242,0.1));
-    }
-    .result-status {
-      font-family: 'Space Grotesk'; font-size: 2rem; font-weight: 800; margin-bottom: 16px;
-    }
-    .status-avoid { color: var(--rose); text-shadow: 0 0 10px var(--rose-glow); }
-    .status-caution { color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
-    .status-consider { color: var(--emerald); text-shadow: 0 0 10px var(--emerald-glow); }
+    .radio-group label { flex: 1; min-width: 120px; text-align: center; padding: 12px; border: 1px solid var(--glass-border); border-radius: 99px; cursor: pointer; transition: var(--transition); color: var(--text-muted); }
+    .radio-group input:checked + label { background: rgba(0, 240, 255, 0.15); border-color: var(--cyan); color: var(--cyan); }
+    
+    .result-box { padding: 40px; text-align: center; background: linear-gradient(135deg, rgba(0,240,255,0.05), rgba(181,55,242,0.05)); position: sticky; top: 100px; }
+    .result-box .label { font-size: 0.85rem; font-weight: 800; letter-spacing: 1px; color: var(--cyan); margin-bottom: 10px; text-transform: uppercase; }
+    .result-pill { display: inline-block; padding: 8px 16px; border-radius: 99px; background: rgba(255,255,255,0.1); font-weight: 700; margin-bottom: 20px; border: 1px solid var(--glass-border); }
+    .result-box h4 { font-size: 1.6rem; color: #fff; margin-bottom: 16px; }
+    .result-box p { color: var(--text-muted); line-height: 1.6; }
+
+    /* THE GAME: BACTERIA BUSTER */
+    #game { background: rgba(0,0,0,0.3); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); }
+    .game-wrapper { max-width: 700px; margin: 0 auto; text-align: center; padding: 40px; }
+    .game-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 30px auto; max-width: 400px; }
+    .cell { aspect-ratio: 1; background: rgba(0,0,0,0.6); border: 1px solid var(--glass-border); border-radius: 16px; position: relative; overflow: hidden; cursor: crosshair; }
+    .bacteria { width: 80%; height: 80%; position: absolute; bottom: -100%; left: 10%; transition: bottom 0.2s; pointer-events: auto; }
+    .bacteria.up { bottom: 10%; }
+    .bac-gram-neg::before { content: '🦠'; font-size: 3.5rem; position: absolute; inset:0; display:grid; place-items:center; filter: hue-rotate(90deg) drop-shadow(0 0 10px var(--emerald)); }
+    .bac-gram-pos::before { content: '🧫'; font-size: 3.5rem; position: absolute; inset:0; display:grid; place-items:center; filter: drop-shadow(0 0 10px var(--purple)); }
+    .game-stats { display: flex; justify-content: space-around; font-family: 'Space Grotesk'; font-size: 1.4rem; color: var(--cyan); margin-bottom: 20px; padding: 15px; background: rgba(0, 240, 255, 0.05); border-radius: 16px; border: 1px solid var(--cyan); }
+
+    /* TEAM & REFS */
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+    .team-member { padding: 16px 12px; text-align: center; color: #fff; font-weight: 600; border-radius: 16px; transition: var(--transition); border: 1px solid var(--glass-border); background: rgba(255,255,255,0.02); }
+    .team-member:hover { background: rgba(0,240,255,0.1); border-color: var(--cyan); transform: translateY(-3px); }
+    
+    .refs-list { list-style: none; display: grid; gap: 12px; }
+    .refs-list li { padding: 20px; border-left: 4px solid var(--cyan); color: var(--text-muted); font-size: 0.95rem; }
+
+    footer { text-align: center; padding: 30px; border-top: 1px solid var(--glass-border); color: var(--text-muted); margin-top: 50px; }
 
     /* ANIMATIONS */
-    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    .reveal { opacity: 0; transform: translateY(40px); transition: 0.8s ease-out; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
     .reveal.active { opacity: 1; transform: translateY(0); }
 
-    @media (max-width: 992px) {
-      .hero-grid, .decision-wrap { grid-template-columns: 1fr; text-align: center; }
-      .hero-actions { justify-content: center; }
+    @media (max-width: 1100px) {
+      .timeline, .warning-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+      .risk-grid { grid-template-columns: repeat(3, 1fr); }
+      .balance-wrap { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 860px) {
       .nav-links { display: none; }
+      .hero-grid, .intro-grid, .compare-grid, .decision-wrap { grid-template-columns: 1fr; }
+      .hero-metrics { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVIGATION -->
-  <nav class="nav">
+  <!-- NAV -->
+  <header class="nav">
     <div class="nav-inner">
       <div class="brand">
         <div class="brand-mark">FQ</div>
         <div class="brand-title">Fluoroquinolones</div>
       </div>
-      <div class="nav-links">
+      <nav class="nav-links">
+        <a href="#intro">Intro</a>
         <a href="#mechanism">Mechanism</a>
-        <a href="#safety">Safety Profile</a>
+        <a href="#comparison">Evolution</a>
+        <a href="#warnings">Safety</a>
+        <a href="#balance">Risk/Benefit</a>
         <a href="#game">Pharma Strike</a>
-        <a href="#decision">AI Decision</a>
-        <a href="#team" class="nav-cta">Group 24</a>
-      </div>
+        <a href="#decision">AI Tool</a>
+        <a class="nav-cta" href="#references">References</a>
+      </nav>
     </div>
-  </nav>
+  </header>
 
-  <!-- HERO SECTION -->
+  <!-- HERO -->
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-content reveal active">
-        <div class="kicker">Clinical Pharmacology</div>
-        <h1>Next-Gen <br><span>Antibiotic</span> <br>Intelligence.</h1>
-        <p class="desc" style="margin: 0;">Interactive clinical profiling of Fluoroquinolones. Balancing supreme bactericidal power with critical safety parameters.</p>
+        <div class="kicker">Clinical Pharmacology Project</div>
+        <h1>Fluoroquinolones:<br><span>Clinical Use</span> & Safety</h1>
+        <p class="desc" style="margin: 0;">Interactive academic platform exploring clinical indications, severe safety warnings, and the critical risk-benefit balance.</p>
+        
         <div class="hero-actions">
-          <a href="#game" class="btn btn-neon">Play Target Protocol</a>
-          <a href="#decision" class="btn btn-outline">Clinical Decision Tool</a>
+          <a class="btn btn-neon" href="#intro">Explore Protocol ↓</a>
+          <a class="btn btn-outline" href="#decision">Try AI Decision Tool</a>
+        </div>
+
+        <div class="hero-metrics">
+          <div class="metric glass-panel">
+            <div class="value">1</div>
+            <div class="label">Core antibiotic class with broad-spectrum activity</div>
+          </div>
+          <div class="metric glass-panel">
+            <div class="value">2</div>
+            <div class="label">Major enzyme targets: DNA gyrase & topo IV</div>
+          </div>
+          <div class="metric glass-panel">
+            <div class="value">3</div>
+            <div class="label">Main principle: benefits must outweigh risks</div>
+          </div>
         </div>
       </div>
+      
       <div class="hero-visual reveal active">
         <div class="molecule-card">
           <div class="core-orb"></div>
@@ -303,20 +374,34 @@
     </div>
   </section>
 
-  <!-- METRICS -->
-  <section class="container reveal">
-    <div class="metrics-grid">
-      <div class="metric-box glass-panel">
-        <div class="metric-num">95%</div>
-        <div class="metric-label">Oral Bioavailability</div>
+  <!-- INTRO -->
+  <section id="intro" class="container reveal">
+    <div class="section-header">
+      <div class="kicker">Introduction</div>
+      <h2 class="title">What Are Fluoroquinolones?</h2>
+    </div>
+    <div class="intro-grid">
+      <div class="intro-card glass-panel">
+        <h3>Scientific Overview</h3>
+        <p>
+          Fluoroquinolones are broad-spectrum bactericidal antibiotics that inhibit bacterial DNA gyrase and topoisomerase IV.
+          This blocks DNA replication, causes DNA fragmentation, and ultimately leads to bacterial cell death.
+          They were widely used because of their excellent oral bioavailability, strong tissue penetration, and convenient dosing.
+        </p>
       </div>
-      <div class="metric-box glass-panel">
-        <div class="metric-num">2</div>
-        <div class="metric-label">Key Enzyme Targets</div>
-      </div>
-      <div class="metric-box glass-panel">
-        <div class="metric-num">Black Box</div>
-        <div class="metric-label">FDA Warnings</div>
+      <div class="intro-slab glass-panel">
+        <div class="stat">
+          <div class="num">High</div>
+          <div class="txt">oral bioavailability comparable to IV therapy</div>
+        </div>
+        <div class="stat">
+          <div class="num">Strong</div>
+          <div class="txt">tissue penetration in lungs, kidneys, and prostate</div>
+        </div>
+        <div class="stat">
+          <div class="num">Broad</div>
+          <div class="txt">coverage against many Gram-negative and Gram-positive bacteria</div>
+        </div>
       </div>
     </div>
   </section>
@@ -324,30 +409,34 @@
   <!-- MECHANISM -->
   <section id="mechanism" class="container reveal">
     <div class="section-header">
-      <div class="kicker">Mode of Action</div>
-      <h2 class="title">Lethal Interception</h2>
-      <p class="desc">Fluoroquinolones execute a dual-strike mechanism, disrupting the structural integrity of bacterial DNA during replication.</p>
+      <div class="kicker">Mechanism of Action</div>
+      <h2 class="title">How Fluoroquinolones Work</h2>
     </div>
-    <div class="mech-grid">
-      <div class="mech-step glass-panel">
-        <div class="mech-icon">🧬</div>
-        <h4>Target Identification</h4>
-        <p>Locating bacterial replication forks.</p>
+    <div class="timeline">
+      <div class="step glass-panel">
+        <div class="icon">🧬</div>
+        <h4>Bacterial DNA</h4>
+        <p>Replication begins with unwinding and copying of bacterial DNA.</p>
       </div>
-      <div class="mech-step glass-panel">
-        <div class="mech-icon">⚙️</div>
-        <h4>DNA Gyrase Block</h4>
-        <p>Neutralizing supercoiling in Gram-negative strains.</p>
+      <div class="step glass-panel">
+        <div class="icon">⚙️</div>
+        <h4>DNA Gyrase</h4>
+        <p>Primary target in Gram-negative bacteria; relieves torsional stress during replication.</p>
       </div>
-      <div class="mech-step glass-panel">
-        <div class="mech-icon">⛓️</div>
-        <h4>Topo IV Inhibition</h4>
-        <p>Preventing chromosome separation in Gram-positive strains.</p>
+      <div class="step glass-panel">
+        <div class="icon">🔩</div>
+        <h4>Topoisomerase IV</h4>
+        <p>Primary target in Gram-positive bacteria; separates replicated DNA strands.</p>
       </div>
-      <div class="mech-step glass-panel">
-        <div class="mech-icon">💥</div>
-        <h4>Cellular Collapse</h4>
-        <p>DNA fragmentation leading to rapid bactericidal effect.</p>
+      <div class="step glass-panel">
+        <div class="icon">💥</div>
+        <h4>DNA Fragmentation</h4>
+        <p>Enzyme inhibition blocks replication and causes rapid loss of DNA integrity.</p>
+      </div>
+      <div class="step glass-panel">
+        <div class="icon">☠️</div>
+        <h4>Bacterial Death</h4>
+        <p>Fluoroquinolones produce concentration-dependent bactericidal activity.</p>
       </div>
     </div>
   </section>
@@ -356,21 +445,20 @@
   <section id="game" class="reveal">
     <div class="container">
       <div class="section-header">
-        <div class="kicker">Interactive Simulation</div>
+        <div class="kicker">Gamification</div>
         <h2 class="title">Pharma Strike Protocol</h2>
-        <p class="desc">Inject the fluoroquinolone! Tap/Click the bacteria before they replicate. Gram-negative (Green) = 10 pts, Gram-positive (Purple) = 15 pts.</p>
+        <p class="desc">Demonstrate bactericidal activity! Tap the bacteria before they replicate. Gram-negative (Green) = 10 pts, Gram-positive (Purple) = 15 pts.</p>
       </div>
 
-      <div class="game-wrapper glass-panel" style="padding: 40px;">
+      <div class="game-wrapper glass-panel">
         <div class="game-stats">
           <div>Time: <span id="time" style="color:#fff;">30</span>s</div>
           <div>Score: <span id="score" style="color:#fff;">0</span></div>
         </div>
         
-        <button id="startGameBtn" class="btn btn-neon" style="margin-bottom: 20px;">Initiate Protocol</button>
+        <button id="startGameBtn" class="btn btn-neon">Initiate Protocol</button>
 
         <div class="game-board">
-          <!-- 9 Cells for Whack-a-mole style -->
           <div class="cell" data-index="0"></div><div class="cell" data-index="1"></div><div class="cell" data-index="2"></div>
           <div class="cell" data-index="3"></div><div class="cell" data-index="4"></div><div class="cell" data-index="5"></div>
           <div class="cell" data-index="6"></div><div class="cell" data-index="7"></div><div class="cell" data-index="8"></div>
@@ -379,33 +467,238 @@
     </div>
   </section>
 
-  <!-- SAFETY PROFILE -->
-  <section id="safety" class="container reveal">
+  <!-- COMPARISON -->
+  <section id="comparison" class="container reveal">
     <div class="section-header">
-      <div class="kicker">Black Box Warnings</div>
-      <h2 class="title">Collateral Damage</h2>
-      <p class="desc">Potent efficacy carries severe risks. Systemic toxicity parameters that require strict clinical vigilance.</p>
+      <div class="kicker">Clinical Evolution</div>
+      <h2 class="title">Past vs Current Indications</h2>
     </div>
-    <div class="safety-grid">
-      <div class="safety-card glass-panel">
-        <div class="icon">🦵</div>
-        <h4>Tendon Rupture</h4>
-        <p>High risk of Achilles tendinitis, especially in elderly or with corticosteroids.</p>
+    <div class="compare-grid">
+      <div class="compare-card glass-panel past">
+        <div class="compare-head">
+          <h3>Past Use</h3>
+          <div class="compare-pill">First-Line / Broad Use</div>
+        </div>
+        <ul class="compare-list">
+          <li><span>✓</span>Uncomplicated urinary tract infections</li>
+          <li><span>✓</span>Acute bacterial sinusitis</li>
+          <li><span>✓</span>Acute bronchitis</li>
+          <li><span>✓</span>Mild respiratory tract infections</li>
+          <li><span>✓</span>Traveler’s diarrhea and mild GI infections</li>
+          <li><span>✓</span>Frequently used even when safer alternatives were available</li>
+        </ul>
+        <div class="figure-caption">Historical broad-spectrum use was driven by convenience, potency, and strong tissue penetration.</div>
       </div>
-      <div class="safety-card glass-panel">
-        <div class="icon">⚡</div>
-        <h4>CNS Toxicity</h4>
-        <p>Seizures, hallucinations, and severe psychiatric disturbances.</p>
+
+      <div class="compare-card glass-panel current">
+        <div class="compare-head">
+          <h3>Current Use</h3>
+          <div class="compare-pill">Restricted / Selected Cases</div>
+        </div>
+        <ul class="compare-list">
+          <li><span>⚠</span>Complicated urinary tract infections and pyelonephritis</li>
+          <li><span>⚠</span>Hospital-acquired pneumonia</li>
+          <li><span>⚠</span>Severe bacterial infections and sepsis</li>
+          <li><span>⚠</span>Multidrug-resistant organism infections</li>
+          <li><span>⚠</span>When no safer alternatives are available</li>
+          <li><span>⚠</span>Not recommended as first-line therapy for mild infections</li>
+        </ul>
+        <div class="figure-caption">Safety concerns shifted fluoroquinolones from routine therapy to restricted use.</div>
       </div>
-      <div class="safety-card glass-panel">
-        <div class="icon">🕸️</div>
-        <h4>Neuropathy</h4>
-        <p>Peripheral nerve damage that may become permanent.</p>
+    </div>
+  </section>
+
+  <!-- WARNINGS (FLIP CARDS) -->
+  <section id="warnings" class="container reveal">
+    <div class="section-header">
+      <div class="kicker">FDA Safety Warnings</div>
+      <h2 class="title">Major Adverse Effects</h2>
+      <p class="desc">Click any card to reveal more clinical detail.</p>
+    </div>
+    <div class="warning-grid">
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="warn-icon">🦵</div>
+            <h4>Tendon Rupture</h4>
+            <p>Musculoskeletal toxicity</p>
+          </div>
+          <div class="flip-back">
+            <p>Tendinitis and tendon rupture, especially the Achilles tendon. Risk is higher in older adults and with corticosteroid use.</p>
+          </div>
+        </div>
       </div>
-      <div class="safety-card glass-panel">
-        <div class="icon">🫀</div>
-        <h4>Aortic Dissection</h4>
-        <p>Degradation of collagen leading to aneurysms in high-risk patients.</p>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="warn-icon">🧠</div>
+            <h4>Neuropathy</h4>
+            <p>May be irreversible</p>
+          </div>
+          <div class="flip-back">
+            <p>Peripheral neuropathy can present with pain, tingling, burning, or weakness and may persist long after therapy ends.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="warn-icon">⚡</div>
+            <h4>CNS Effects</h4>
+            <p>Dizziness, hallucinations</p>
+          </div>
+          <div class="flip-back">
+            <p>Central nervous system toxicity includes dizziness, insomnia, agitation, confusion, hallucinations, and in severe cases seizures.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="warn-icon">🩸</div>
+            <h4>Dysglycemia</h4>
+            <p>Hypo-/hyperglycemia</p>
+          </div>
+          <div class="flip-back">
+            <p>Blood glucose disturbances are more clinically important in diabetic patients, especially those receiving insulin or sulfonylureas.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="warn-icon">❤️</div>
+            <h4>Aortic Risk</h4>
+            <p>Aneurysm / dissection</p>
+          </div>
+          <div class="flip-back">
+            <p>Fluoroquinolones are associated with increased risk of aortic aneurysm and dissection, especially in vulnerable patients.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RISK FACTORS -->
+  <section id="risks" class="container reveal">
+    <div class="section-header">
+      <div class="kicker">Risk Factors</div>
+      <h2 class="title">Who Is Most at Risk?</h2>
+    </div>
+    <div class="risk-grid">
+      <div class="risk-item glass-panel">
+        <div class="risk-icon">👴</div>
+        <h4>Age &gt; 60 Years</h4>
+        <p>Higher rates of tendon and systemic adverse effects.</p>
+      </div>
+      <div class="risk-item glass-panel">
+        <div class="risk-icon">🫘</div>
+        <h4>Renal Impairment</h4>
+        <p>Reduced clearance increases exposure and toxicity.</p>
+      </div>
+      <div class="risk-item glass-panel">
+        <div class="risk-icon">💊</div>
+        <h4>Corticosteroids</h4>
+        <p>Greatly increases the risk of tendon injury and rupture.</p>
+      </div>
+      <div class="risk-item glass-panel">
+        <div class="risk-icon">📈</div>
+        <h4>High Dose</h4>
+        <p>Adverse effects increase with prolonged therapy.</p>
+      </div>
+      <div class="risk-item glass-panel">
+        <div class="risk-icon">🔁</div>
+        <h4>Organ Transplant</h4>
+        <p>Immunosuppressive treatment compounds risk.</p>
+      </div>
+      <div class="risk-item glass-panel">
+        <div class="risk-icon">🍬</div>
+        <h4>Diabetes Mellitus</h4>
+        <p>Higher likelihood of clinically significant dysglycemia.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BALANCE -->
+  <section id="balance" class="container reveal">
+    <div class="section-header">
+      <div class="kicker">Risk–Benefit Balance</div>
+      <h2 class="title">Clinical Decision Framework</h2>
+      <p class="desc">The key principle is simple: use fluoroquinolones only when benefits clearly outweigh risks.</p>
+    </div>
+    <div class="balance-wrap">
+      <div class="balance-chart glass-panel">
+        <svg viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="beam" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00f0ff"/>
+              <stop offset="100%" stop-color="#0077ff"/>
+            </linearGradient>
+            <linearGradient id="greenPan" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="rgba(0,255,136,0.2)"/>
+              <stop offset="100%" stop-color="rgba(0,255,136,0.05)"/>
+            </linearGradient>
+            <linearGradient id="redPan" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="rgba(255,42,95,0.2)"/>
+              <stop offset="100%" stop-color="rgba(255,42,95,0.05)"/>
+            </linearGradient>
+          </defs>
+
+          <rect x="345" y="108" width="70" height="250" rx="18" fill="rgba(255,255,255,0.1)" stroke="rgba(0,240,255,0.3)"/>
+          <rect x="285" y="350" width="190" height="16" rx="8" fill="rgba(255,255,255,0.2)"/>
+          <circle cx="380" cy="118" r="12" fill="#00f0ff"/>
+
+          <g style="transform-origin:380px 120px; animation: tilt 4s ease-in-out infinite alternate;">
+            <line x1="140" y1="165" x2="620" y2="165" stroke="url(#beam)" stroke-width="14" stroke-linecap="round"/>
+            
+            <!-- Green Pan -->
+            <line x1="165" y1="165" x2="120" y2="250" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+            <line x1="215" y1="165" x2="260" y2="250" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+            <path d="M95 250 H285 V286 H95 Z" rx="18" fill="url(#greenPan)" stroke="#00ff88" stroke-width="2"/>
+            <text x="190" y="272" text-anchor="middle" font-family="Outfit" font-size="16" font-weight="800" fill="#00ff88">BENEFITS</text>
+
+            <!-- Red Pan -->
+            <line x1="545" y1="165" x2="500" y2="250" stroke="#ff2a5f" stroke-width="3" stroke-linecap="round"/>
+            <line x1="595" y1="165" x2="640" y2="250" stroke="#ff2a5f" stroke-width="3" stroke-linecap="round"/>
+            <path d="M475 250 H665 V286 H475 Z" rx="18" fill="url(#redPan)" stroke="#ff2a5f" stroke-width="2"/>
+            <text x="570" y="272" text-anchor="middle" font-family="Outfit" font-size="16" font-weight="800" fill="#ff2a5f">RISKS</text>
+          </g>
+
+          <circle cx="190" cy="200" r="32" fill="#00ff88" opacity="0.8"/>
+          <text x="190" y="210" text-anchor="middle" font-family="Outfit" font-size="28" font-weight="900" fill="#050b14">✓</text>
+          <circle cx="570" cy="200" r="32" fill="#ff2a5f" opacity="0.8"/>
+          <text x="570" y="210" text-anchor="middle" font-family="Outfit" font-size="28" font-weight="900" fill="#050b14">!</text>
+        </svg>
+      </div>
+
+      <div>
+        <div class="benefit-risk-grid">
+          <div class="br-card glass-panel green">
+            <h4>Potential Benefits</h4>
+            <ul>
+              <li><span>✓</span>Broad-spectrum bactericidal activity</li>
+              <li><span>✓</span>Excellent tissue penetration</li>
+              <li><span>✓</span>High oral bioavailability</li>
+              <li><span>✓</span>Convenient once/twice daily dosing</li>
+            </ul>
+          </div>
+          <div class="br-card glass-panel red">
+            <h4>Serious Risks</h4>
+            <ul>
+              <li><span>×</span>Tendon rupture and neuropathy</li>
+              <li><span>×</span>CNS toxicity and seizures</li>
+              <li><span>×</span>Dysglycemia and QT prolongation</li>
+              <li><span>×</span>Aortic aneurysm/dissection</li>
+            </ul>
+          </div>
+        </div>
+        <div class="principle">
+          Use fluoroquinolones only when therapeutic benefits clearly outweigh potential risks.
+        </div>
       </div>
     </div>
   </section>
@@ -413,41 +706,49 @@
   <!-- DECISION TOOL -->
   <section id="decision" class="container reveal">
     <div class="section-header">
-      <div class="kicker">AI Logic Core</div>
-      <h2 class="title">Clinical Navigator</h2>
-      <p class="desc">Process patient parameters through the recommendation matrix to determine FQ viability.</p>
+      <div class="kicker">Interactive Clinical Tool</div>
+      <h2 class="title">Should Fluoroquinolones Be Used?</h2>
+      <p class="desc">A clinical reasoning tool that turns key recommendations into an interactive decision pathway.</p>
     </div>
-    
+
     <div class="decision-wrap">
-      <div class="glass-panel" style="padding: 40px;">
-        <div class="question-box">
-          <label>1. Infection Severity?</label>
-          <div class="radio-group">
-            <input type="radio" id="sev-mild" name="severity" value="mild"><label for="sev-mild">Mild / Uncomplicated</label>
-            <input type="radio" id="sev-severe" name="severity" value="severe"><label for="sev-severe">Severe / Complicated</label>
+      <div class="decision-card glass-panel">
+        <h3>Case Inputs</h3>
+        <p>Choose the scenario and the tool will suggest the safest general direction.</p>
+
+        <div class="decision-q">
+          <div class="q-row">
+            <label>Is the infection mild / uncomplicated?</label>
+            <div class="radio-group" data-name="mild">
+              <input type="radio" id="mild-yes" name="mild" value="yes"><label for="mild-yes">Yes</label>
+              <input type="radio" id="mild-no" name="mild" value="no"><label for="mild-no">No</label>
+            </div>
           </div>
-        </div>
-        <div class="question-box">
-          <label>2. Alternative Agents Available?</label>
-          <div class="radio-group">
-            <input type="radio" id="alt-yes" name="alt" value="yes"><label for="alt-yes">Yes, Safer Options</label>
-            <input type="radio" id="alt-no" name="alt" value="no"><label for="alt-no">No Options Left</label>
+          <div class="q-row">
+            <label>Are safer alternatives available?</label>
+            <div class="radio-group" data-name="alt">
+              <input type="radio" id="alt-yes" name="alt" value="yes"><label for="alt-yes">Yes</label>
+              <input type="radio" id="alt-no" name="alt" value="no"><label for="alt-no">No</label>
+            </div>
           </div>
-        </div>
-        <div class="question-box">
-          <label>3. Patient Risk Factors (Age >60, Steroids, Aneurysm)?</label>
-          <div class="radio-group">
-            <input type="radio" id="risk-yes" name="risk" value="yes"><label for="risk-yes">Present</label>
-            <input type="radio" id="risk-no" name="risk" value="no"><label for="risk-no">Absent</label>
+          <div class="q-row">
+            <label>Are major risk factors present?</label>
+            <div class="radio-group" data-name="risk">
+              <input type="radio" id="risk-yes" name="risk" value="yes"><label for="risk-yes">Yes</label>
+              <input type="radio" id="risk-no" name="risk" value="no"><label for="risk-no">No</label>
+            </div>
           </div>
+          <button class="btn btn-neon" id="evaluateBtn" type="button" style="width:100%;">Evaluate Protocol</button>
         </div>
-        <button id="calcDecision" class="btn btn-neon" style="width: 100%; margin-top: 10px;">Analyze Case</button>
       </div>
 
-      <div class="result-panel glass-panel">
-        <h3 style="color: var(--text-muted); margin-bottom: 20px; font-weight: 600;">SYSTEM OUTPUT</h3>
-        <div id="res-status" class="result-status" style="color: #fff;">AWAITING DATA...</div>
-        <p id="res-desc" style="color: var(--text-muted);">Input clinical parameters to generate a protocol recommendation.</p>
+      <div class="result-box glass-panel" id="resultBox">
+        <div class="label">Decision Output</div>
+        <div class="result-pill" id="resultPill">Awaiting input</div>
+        <h4 id="resultTitle" style="font-family:'Space Grotesk'">Choose inputs to generate recommendation.</h4>
+        <p id="resultText">
+          The algorithm reflects the key message: avoid FQs in mild infections, consider only when benefits outweigh risks, and use cautiously in high-risk patients.
+        </p>
       </div>
     </div>
   </section>
@@ -455,24 +756,49 @@
   <!-- TEAM -->
   <section id="team" class="container reveal">
     <div class="section-header">
-      <div class="kicker">The Architects</div>
-      <h2 class="title">Group 24</h2>
+      <div class="kicker">Research Team</div>
+      <h2 class="title">Project Contributors</h2>
     </div>
-    <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
-      <!-- Array of names injected beautifully -->
-      <span class="kicker">Osama Tharwat</span><span class="kicker">Razan Hisham</span>
-      <span class="kicker">Tasneem Khaled</span><span class="kicker">Nour Hany</span>
-      <span class="kicker">Rawan Attef</span><span class="kicker">Alaa Abd El Mageed</span>
-      <span class="kicker">Rawan Hassan</span><span class="kicker">Yasmeen Wahdan</span>
-      <span class="kicker">Saif Ahmed</span><span class="kicker">Yousef Osama</span>
-      <span class="kicker">Aya Abdelnaser</span><span class="kicker">Shimaa Esam</span>
-      <span class="kicker">Menna Sabry</span><span class="kicker">Fatma Emaad</span>
-      <span class="kicker">Sarah Ali</span>
+    <div class="team-grid">
+      <div class="team-member">Osama Tharwat</div>
+      <div class="team-member">Razan Hisham</div>
+      <div class="team-member">Tasneem Khaled</div>
+      <div class="team-member">Nour Hany</div>
+      <div class="team-member">Rawan Attef</div>
+      <div class="team-member">Alaa Abd El Mageed</div>
+      <div class="team-member">Rawan Hassan</div>
+      <div class="team-member">Yasmeen Wahdan</div>
+      <div class="team-member">Saif Ahmed</div>
+      <div class="team-member">Yousef Osama</div>
+      <div class="team-member">Aya Abdelnaser</div>
+      <div class="team-member">Shimaa Esam</div>
+      <div class="team-member">Menna Sabry</div>
+      <div class="team-member">Fatma Emaad</div>
+      <div class="team-member">Sarah Ali</div>
     </div>
   </section>
 
+  <!-- REFERENCES -->
+  <section id="references" class="container reveal">
+    <div class="section-header">
+      <div class="kicker">References</div>
+      <h2 class="title">Key Sources</h2>
+    </div>
+    <ul class="refs-list glass-panel">
+      <li>1. U.S. Food and Drug Administration (FDA). Fluoroquinolone Antibiotics: Drug Safety Communication. 2016/2018.</li>
+      <li>2. European Medicines Agency (EMA). Quinolone- and Fluoroquinolone-Containing Medicinal Products: Article 31 Referral. 2019.</li>
+      <li>3. Levofloxacin / fluoroquinolone safety data from standard pharmacology references and clinical guideline summaries used in the project materials.</li>
+      <li>4. Lippincott Illustrated Reviews: Pharmacology. Relevant pages on fluoroquinolones and antibacterial pharmacology.</li>
+      <li>5. Course lecture materials (Pharmacology-3, Antibacterials-II) as used in the project preparation.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <strong>Group 24 • Clinical Pharmacology</strong>
+  </footer>
+
   <script>
-    // --- Scroll Reveal Logic ---
+    // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const revealOnScroll = () => {
       const winHeight = window.innerHeight;
@@ -482,40 +808,58 @@
       });
     };
     window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll(); // Trigger on load
+    revealOnScroll();
 
-    // --- Decision Tool Logic ---
-    document.getElementById('calcDecision').addEventListener('click', () => {
-      const sev = document.querySelector('input[name="severity"]:checked')?.value;
-      const alt = document.querySelector('input[name="alt"]:checked')?.value;
-      const risk = document.querySelector('input[name="risk"]:checked')?.value;
-      
-      const statusEl = document.getElementById('res-status');
-      const descEl = document.getElementById('res-desc');
+    // Decision Tool Logic
+    const evaluateBtn = document.getElementById('evaluateBtn');
+    const resultPill = document.getElementById('resultPill');
+    const resultTitle = document.getElementById('resultTitle');
+    const resultText = document.getElementById('resultText');
 
-      if(!sev || !alt || !risk) {
-        statusEl.textContent = "INCOMPLETE DATA";
-        statusEl.className = "result-status";
-        descEl.textContent = "Please complete all fields to process the algorithm.";
+    function getChecked(name){
+      const el = document.querySelector(`input[name="${name}"]:checked`);
+      return el ? el.value : null;
+    }
+
+    evaluateBtn?.addEventListener('click', () => {
+      const mild = getChecked('mild');
+      const alt = getChecked('alt');
+      const risk = getChecked('risk');
+
+      if (!mild || !alt || !risk) {
+        resultPill.textContent = 'Incomplete input';
+        resultPill.style.color = 'var(--text-main)';
+        resultTitle.textContent = 'Please answer all three questions.';
+        resultText.textContent = 'The tool works best when every scenario input is selected. This keeps the decision output aligned with the project rules.';
         return;
       }
 
-      if (sev === 'mild' || alt === 'yes') {
-        statusEl.textContent = "PROTOCOL: AVOID";
-        statusEl.className = "result-status status-avoid";
-        descEl.textContent = "Do not prescribe. Risks outweigh benefits for mild infections or when safer alternatives exist. FDA black box warning applies.";
-      } else if (risk === 'yes') {
-        statusEl.textContent = "PROTOCOL: CAUTION";
-        statusEl.className = "result-status status-caution";
-        descEl.textContent = "Use only if absolutely necessary. High risk of severe adverse effects (Tendon rupture/Aortic issues). Monitor patient closely.";
-      } else {
-        statusEl.textContent = "PROTOCOL: CONSIDER";
-        statusEl.className = "result-status status-consider";
-        descEl.textContent = "Viable treatment. Infection is severe, alternatives are exhausted, and patient lacks major risk factors. Proceed with standard FQ protocol.";
+      if (mild === 'yes' || alt === 'yes') {
+        resultPill.textContent = 'Recommendation: Avoid';
+        resultPill.style.color = 'var(--rose)';
+        resultPill.style.borderColor = 'var(--rose)';
+        resultTitle.textContent = 'Avoid fluoroquinolones for this scenario.';
+        resultText.textContent = 'Mild or uncomplicated infections, especially when safer alternatives are available, should generally not be treated with fluoroquinolones.';
+        return;
       }
+
+      if (risk === 'yes') {
+        resultPill.textContent = 'Recommendation: Use with caution';
+        resultPill.style.color = 'var(--amber)';
+        resultPill.style.borderColor = 'var(--amber)';
+        resultTitle.textContent = 'Use only if benefits clearly outweigh the risks.';
+        resultText.textContent = 'High-risk patients require careful assessment, dose optimization, and monitoring. Fluoroquinolones should be reserved for cases where therapeutic need is strong.';
+        return;
+      }
+
+      resultPill.textContent = 'Recommendation: Consider';
+      resultPill.style.color = 'var(--emerald)';
+      resultPill.style.borderColor = 'var(--emerald)';
+      resultTitle.textContent = 'Fluoroquinolones may be considered in selected serious infections.';
+      resultText.textContent = 'When infection is severe, alternatives are unavailable, and major risk factors are absent, fluoroquinolones may be used with appropriate clinical judgment.';
     });
 
-    // --- Pharma Strike Game Logic ---
+    // Pharma Strike Game Logic
     const cells = document.querySelectorAll('.cell');
     const scoreDisplay = document.getElementById('score');
     const timeDisplay = document.getElementById('time');
@@ -524,13 +868,9 @@
     let lastCell;
     let timeUp = false;
     let score = 0;
-    let gameTimer;
     let countdown;
 
-    function randomTime(min, max) {
-      return Math.round(Math.random() * (max - min) + min);
-    }
-
+    function randomTime(min, max) { return Math.round(Math.random() * (max - min) + min); }
     function randomCell(cells) {
       const idx = Math.floor(Math.random() * cells.length);
       const cell = cells[idx];
@@ -540,20 +880,15 @@
     }
 
     function peep() {
-      const time = randomTime(500, 1000);
+      const time = randomTime(600, 1200);
       const cell = randomCell(cells);
-      
-      // Create bacteria element
       const bac = document.createElement('div');
       bac.classList.add('bacteria');
-      // Randomize Gram Neg (10pts) or Pos (15pts)
       const isPos = Math.random() > 0.6;
       bac.classList.add(isPos ? 'bac-gram-pos' : 'bac-gram-neg');
       bac.dataset.points = isPos ? '15' : '10';
-      
       cell.appendChild(bac);
       
-      // Animate up
       setTimeout(() => bac.classList.add('up'), 50);
 
       setTimeout(() => {
@@ -584,19 +919,17 @@
           startBtn.disabled = false;
           startBtn.textContent = "Restart Protocol";
           startBtn.style.opacity = "1";
-          alert(`Protocol Complete! Total Bacteria Eliminated: ${score} points.`);
         }
       }, 1000);
     }
 
     function hit(e) {
-      if(!e.isTrusted) return; // Prevent fake clicks
+      if(!e.isTrusted) return;
       const bac = e.target;
       if(bac.classList.contains('bacteria')) {
         score += parseInt(bac.dataset.points);
         scoreDisplay.textContent = score;
         bac.classList.remove('up');
-        // Visual feedback
         bac.style.transform = "scale(0) rotate(90deg)";
         bac.style.opacity = "0";
       }
