@@ -361,6 +361,94 @@
       gap:8px;
     }
 
+    /* CARTOON ANIMATION (DRUG VS BACTERIA) */
+    .battle-scene {
+      position: relative;
+      width: 100%;
+      height: 120px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      border: 1px dashed var(--blue-500);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      margin-top: 15px;
+    }
+
+    .hero-pill {
+      width: 50px;
+      height: 25px;
+      background: linear-gradient(90deg, var(--blue-700) 50%, #ffffff 50%);
+      border-radius: 50px;
+      position: absolute;
+      border: 2px solid var(--blue-900);
+      animation: attack 3s infinite ease-in-out;
+      z-index: 10;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* Cartoon Eyes for the Pill */
+    .hero-pill::before, .hero-pill::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      width: 4px;
+      height: 4px;
+      background: #000;
+      border-radius: 50%;
+    }
+    .hero-pill::before { right: 10px; }
+    .hero-pill::after { right: 18px; }
+
+    .bacteria-squad {
+      position: absolute;
+      right: 20px;
+      display: flex;
+      gap: 15px;
+    }
+
+    .bacterium {
+      width: 35px;
+      height: 35px;
+      background: var(--green);
+      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+      position: relative;
+      animation: shake 0.5s infinite alternate, die 3s infinite;
+      box-shadow: inset -5px -5px 0 rgba(0,0,0,0.1);
+    }
+    
+    /* Spikes for bacteria */
+    .bacterium::after {
+      content: '🦠';
+      position: absolute;
+      top: 4px;
+      left: 5px;
+      font-size: 20px;
+    }
+
+    .bacterium:nth-child(1) { animation-delay: 0s, 0s; }
+    .bacterium:nth-child(2) { animation-delay: 0.2s, 0.5s; background: #3cb371; }
+    .bacterium:nth-child(3) { animation-delay: 0.4s, 1s; background: #20b2aa; }
+
+    @keyframes attack {
+      0% { left: 10px; transform: rotate(0deg); }
+      30% { left: 40%; transform: rotate(20deg) scale(1.2); }
+      50% { left: 65%; transform: rotate(-10deg) scale(1.5); }
+      80%, 100% { left: 10px; transform: rotate(0deg) scale(1); }
+    }
+
+    @keyframes shake {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-5px) scale(1.05); }
+    }
+
+    @keyframes die {
+      0%, 40% { opacity: 1; filter: grayscale(0); transform: scale(1); }
+      50%, 60% { opacity: 0.5; filter: grayscale(1); transform: scale(0.8) rotate(20deg); background: var(--red); }
+      70%, 100% { opacity: 0; transform: scale(0) rotate(45deg); }
+    }
+
     .pill-stack{
       display:grid;
       gap:12px;
@@ -414,27 +502,6 @@
       border-radius:999px;
       flex:0 0 auto;
     }
-    <div class="capsule-animation">
-  
-  <div class="capsule">
-    <div class="capsule-half left"></div>
-    <div class="capsule-half right"></div>
-  </div>
-
-  <div class="particles">
-    <span class="particle p1"></span>
-    <span class="particle p2"></span>
-    <span class="particle p3"></span>
-    <span class="particle p4"></span>
-  </div>
-
-  <div class="bacteria-group">
-    <div class="bacteria b1"></div>
-    <div class="bacteria b2"></div>
-    <div class="bacteria b3"></div>
-  </div>
-
-</div>
 
     .dna-box{
       margin-top:18px;
@@ -595,9 +662,6 @@
       font-size:.9rem;
       line-height:1.6;
     }
-    .connector{
-      display:none;
-    }
 
     /* COMPARE */
     .compare-grid{
@@ -687,7 +751,6 @@
       background:var(--red-soft);
       color:var(--red);
     }
-
     .compare-image-card{
       margin-top:22px;
       padding:18px;
@@ -1220,7 +1283,6 @@
         <div class="hero-badge">Clinical Pharmacology Project</div>
         <h1 class="hero-title">Fluoroquinolones:<br><span>Clinical Use</span> &amp; Safety Profile</h1>
         
-
         <div class="hero-actions">
           <a class="btn btn-primary" href="#intro">Explore the Topic ↓</a>
           <a class="btn btn-secondary" href="#decision">Try the Decision Tool</a>
@@ -1246,30 +1308,18 @@
         <div class="hero-art">
           <div class="hero-art-top">
             <div class="hero-art-tag">Interactive Overview</div>
-            <div style="font-size:.82rem;color:var(--muted);font-weight:700;">Group 24 </div>
+            <div style="font-size:.82rem;color:var(--muted);font-weight:700;">Group 24</div>
           </div>
 
-          <div class="capsule-animation">
-  
-  <div class="capsule">
-    <div class="capsule-half left"></div>
-    <div class="capsule-half right"></div>
-  </div>
-
-  <div class="particles">
-    <span class="particle p1"></span>
-    <span class="particle p2"></span>
-    <span class="particle p3"></span>
-    <span class="particle p4"></span>
-  </div>
-
-  <div class="bacteria-group">
-    <div class="bacteria b1"></div>
-    <div class="bacteria b2"></div>
-    <div class="bacteria b3"></div>
-  </div>
-
-</div>
+          <!-- NEW DRUG VS BACTERIA ANIMATION -->
+          <div class="battle-scene">
+            <div class="hero-pill"></div>
+            <div class="bacteria-squad">
+              <div class="bacterium"></div>
+              <div class="bacterium"></div>
+              <div class="bacterium"></div>
+            </div>
+          </div>
 
           <div class="dna-box">
             <div class="dna-wrap" aria-hidden="true">
@@ -1321,21 +1371,10 @@
                 <div class="pill-icon">🧬</div>
                 <div>
                   <h4>Mechanism</h4>
-                  <p>DNA gyrase and topoisomerase IV inhibition</p>
+                  <p>DNA gyrase & topoisomerase IV</p>
                 </div>
               </div>
               <div class="badge">Core MOA</div>
-            </div>
-
-            <div class="pill green">
-              <div class="pill-left">
-                <div class="pill-icon">✅</div>
-                <div>
-                  <h4>Benefits</h4>
-                  <p>Broad-spectrum activity and excellent penetration</p>
-                </div>
-              </div>
-              <div class="badge">Clinical Value</div>
             </div>
 
             <div class="pill red">
@@ -1343,7 +1382,7 @@
                 <div class="pill-icon">⚠️</div>
                 <div>
                   <h4>Safety Warning</h4>
-                  <p>Serious adverse effects can be disabling or irreversible</p>
+                  <p>Serious adverse effects possible</p>
                 </div>
               </div>
               <div class="badge">FDA Alert</div>
@@ -1446,7 +1485,7 @@
           <li><span>✓</span>Acute bacterial sinusitis</li>
           <li><span>✓</span>Acute bronchitis</li>
           <li><span>✓</span>Mild respiratory tract infections</li>
-          <li><span>✓</span>Traveler’s diarrhea and mild gastrointestinal infections</li>
+          <li><span>✓</span>Traveler’s diarrhea and mild GI infections</li>
           <li><span>✓</span>Frequently used even when safer alternatives were available</li>
         </ul>
 
@@ -1637,7 +1676,6 @@
 
             <g style="transform-origin:380px 120px; animation: tilt 4s ease-in-out infinite alternate;">
               <line x1="140" y1="165" x2="620" y2="165" stroke="url(#beam)" stroke-width="14" stroke-linecap="round"/>
-
               <line x1="165" y1="165" x2="120" y2="250" stroke="#2e8b57" stroke-width="5" stroke-linecap="round"/>
               <line x1="215" y1="165" x2="260" y2="250" stroke="#2e8b57" stroke-width="5" stroke-linecap="round"/>
               <path d="M95 250 H285 V286 H95 Z" rx="18" fill="url(#greenPan)" stroke="#86efac" stroke-width="2"/>
@@ -1651,7 +1689,6 @@
 
             <circle cx="190" cy="200" r="32" fill="#2e8b57"/>
             <text x="190" y="209" text-anchor="middle" font-family="DM Sans" font-size="30" font-weight="900" fill="#fff">✓</text>
-
             <circle cx="570" cy="200" r="32" fill="#d9534f"/>
             <text x="570" y="209" text-anchor="middle" font-family="DM Sans" font-size="32" font-weight="900" fill="#fff">!</text>
           </svg>
@@ -1763,7 +1800,7 @@
       <div class="team-member reveal">Shimaa Esam</div>
       <div class="team-member reveal">Menna Sabry</div>
       <div class="team-member reveal">Fatma Emaad</div>
-      <div class="team-member reveal">Sarah Ali </div>
+      <div class="team-member reveal">Sarah Ali</div>
     </div>
   </section>
 
@@ -1784,7 +1821,7 @@
   </section>
 
   <footer>
-    <strong>Group 24 </strong>
+    <strong>Group 24</strong>
   </footer>
 
   <script>
@@ -1849,9 +1886,6 @@
       resultTitle.textContent = 'Fluoroquinolones may be considered in selected serious infections.';
       resultText.textContent = 'When infection is severe, alternatives are unavailable, and major risk factors are absent, fluoroquinolones may be used with appropriate clinical judgment.';
     });
-
-    // Default state
-    resultPill.textContent = 'Awaiting input';
 
     // Extra: click result box to reset
     document.getElementById('resultBox')?.addEventListener('dblclick', () => {
